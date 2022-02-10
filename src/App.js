@@ -21,7 +21,7 @@ class App extends Component {
         </div>
         <div id="main">
           <Routes>
-            <Route index path="/" element={<Home />} />
+            <Route  path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/course/:id" element={<CourseDetails />} />
             <Route path="/category/:id" element={<Category />} />
