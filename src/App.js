@@ -12,6 +12,7 @@ import MyCourse from "./screen/user/MyCourse";
 import UserProfileScreen from "./screen/user/UserProfile";
 import Test from "./screen/Test";
 import MyCourseDetail from "./screen/MyCourseDetail/MyCourseDetail";
+import Learn from "./screen/locationLearn/Learn";
 class App extends Component {
   render() {
     return (
@@ -22,6 +23,7 @@ class App extends Component {
         <div id="main">
           <Routes>
             <Route index path="/" element={<Home />} />
+            <Route path="/learn/:id" element={<Learn />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/course/:id" element={<CourseDetails />} />
             <Route path="/category/:id" element={<Category />} />
@@ -36,9 +38,7 @@ class App extends Component {
             <Route path="/test" element={<Test />}></Route>
           </Routes>
         </div>
-        <div id="footer">
-          <Footer />
-        </div>
+        <div id="footer">{/* <Footer /> */}</div>
       </div>
     );
   }

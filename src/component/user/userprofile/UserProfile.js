@@ -24,6 +24,7 @@ export default function UserProfile(props) {
 
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
+
   const { user, loading } = userDetails;
 
   useEffect(() => {
@@ -31,11 +32,12 @@ export default function UserProfile(props) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(getUserDetail());
     } else {
+      console.log("user: ", user);
       setDataUser({
-        User_name: user.information[0].User_name,
-        User_account: user.information[0].User_account,
-        User_phone: user.information[0].User_phone,
-        User_DoB: user.information[0].User_DoB,
+        User_name: user.information.User_name,
+        User_account: user.information.User_account,
+        User_phone: user.information.User_phone,
+        User_DoB: user.information.User_DoB,
       });
     }
   }, [dispatch, user]);
@@ -69,7 +71,7 @@ export default function UserProfile(props) {
       updateUserProfile({
         User_name: dataUser.User_name,
         User_DoB: dataUser.User_DoB,
-        User_image: media ? media : user.information[0].User_image,
+        User_image: media ? media : user.information.User_image,
       })
     );
     dispatch({ type: USER_DETAILS_RESET });
@@ -88,7 +90,7 @@ export default function UserProfile(props) {
                     src={
                       avatar !== ""
                         ? URL.createObjectURL(avatar)
-                        : user.information[0].User_image
+                        : user.information.User_image
                     }
                     className="img-fluid image-avatar"
                     alt="avatar"

@@ -18,7 +18,7 @@ export default function UserCourse() {
       {loading && <LoadingPage />}
       {list && (
         <div>
-          <h3>Khóa học của tôi</h3>
+          <h3>Khóa học của tôi </h3>
           <div className="my-course-wrapper">
             {list.map((item) => (
               <UserCourseItem key={item.id} course={item} />

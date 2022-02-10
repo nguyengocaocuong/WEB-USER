@@ -3,7 +3,6 @@ import CourseDetails from "./component/courseDetails/CourseDetails";
 import Category from "./component/category/Category";
 
 export const routers = [
-  
   {
     path: "/",
     label: "courses-details",
@@ -23,7 +22,6 @@ export const routers = [
     label: "",
     main: () => {
       <Category />;
-    }
-  }
+    },
+  },
 ];
-

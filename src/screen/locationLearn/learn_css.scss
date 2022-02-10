@@ -1,0 +1,17 @@
+.containerflex {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 80px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.flexitem1 {
+  width: 650px;
+  height: 200px;
+}
+.flexitem3 {
+  width: 480px;
+  margin-left: 30px;
+}
