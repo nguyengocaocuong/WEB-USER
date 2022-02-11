@@ -12,49 +12,23 @@ import {
   USER_DETAILS_RESET,
 } from "../../../redux/constants/userContants";
 import Table from '../../../component/table/Table'
+import { getData } from "../../../utils/fecthData";
 const headData = [
   "",
-  "Tên khóa học",
-  "Tên hài học",
+  "Tên Bài học",
   "Ngày học"
 ]
-const fixData = [
-  {
-    Course_header: "Tiếng Hàn",
-    Lesson_header: "Giới thiệu",
-    date: "21/20/2000"
-  },
-  {
-    Course_header: "Tiếng Hàn",
-    Lesson_header: "Giới thiệu",
-    date: "21/20/2000"
-  },
-  {
-    Course_header: "Tiếng Hàn",
-    Lesson_header: "Giới thiệu",
-    date: "21/20/2000"
-  },
-  {
-    Course_header: "Tiếng Hàn",
-    Lesson_header: "Giới thiệu",
-    date: "21/20/2000"
-  },
-  {
-    Course_header: "Tiếng Hàn",
-    Lesson_header: "Giới thiệu",
-    date: "21/20/2000"
-  }
-]
+
 const renderHead = (item, index) => <th key={index}>{item}</th>
 const renderBody = (item, index) => (
   <tr key={index}>
-      <td>{index + 1}</td>
-      <td>{item.Course_header}</td>
-      <td>{item.Lesson_header}</td>
-      <td>{item.date}</td>
+    <td>{index + 1}</td>
+    <td>{item.Lesson_header}</td>
+    <td>{item.time}</td>
   </tr>
 )
 export default function UserProfile(props) {
+  const [fixData, setFixData] = useState([])
   const [dataUser, setDataUser] = useState({
     User_name: "",
     User_account: "",
@@ -62,7 +36,6 @@ export default function UserProfile(props) {
     User_DoB: "",
   });
   const [avatar, setAvatar] = useState("");
-  console.log(avatar);
 
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
@@ -70,11 +43,15 @@ export default function UserProfile(props) {
   const { user, loading } = userDetails;
 
   useEffect(() => {
+    getData('user/getLearningHistory', JSON.parse(localStorage.getItem("userInfo")).success.token).then(data => {
+      setFixData(data)
+      console.log(data)
+    })
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(getUserDetail());
     } else {
-      console.log("user: ", user);
+
       setDataUser({
         User_name: user.information.User_name,
         User_account: user.information.User_account,
@@ -119,6 +96,20 @@ export default function UserProfile(props) {
     dispatch({ type: USER_DETAILS_RESET });
   };
 
+  const next = () => {
+    axios.get(fixData.next_page_url, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("userInfo")).success.token}`,
+      },
+    }).then(data => setFixData(data))
+  }
+  const prev = () => {
+    axios.get(fixData.prev_page_url, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("userInfo")).success.token}`,
+      },
+    }).then(data => setFixData(data))
+  }
   return (
     <>
       {loading && <LoadingPage />}
@@ -252,13 +243,18 @@ export default function UserProfile(props) {
                   aria-labelledby="list-profile-list"
                 >
                   <h4>Lịch sử học tập</h4>
-                 <Table
-                 limit='10'
-                 headeData={headData}
-                 renderHead={(item,index)=> renderHead(item,index)}
-                 bodyData={fixData}
-                 renderBody={(item,index)=> renderBody(item,index)}
-                 />
+                  {
+                    fixData.data.length > 0 ? <Table
+                      limit='10'
+                      headeData={headData}
+                      renderHead={(item, index) => renderHead(item, index)}
+                      bodyData={fixData.data}
+                      renderBody={(item, index) => renderBody(item, index)}
+                      nextPage={() => { next() }}
+                      prevPage={() => { prev() }}
+                    /> : ''
+                  }
+
                 </div>
 
               </div>
