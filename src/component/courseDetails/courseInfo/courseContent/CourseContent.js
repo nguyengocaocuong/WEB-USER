@@ -2,6 +2,7 @@ import "./about.scss";
 import React from "react";
 import { Accordion } from "react-bootstrap";
 import LessonDetail from "../../../LessonDetail";
+import LearnFree from "../../../LearnFree";
 
 export default function CourseContent({ data }) {
   return (
@@ -18,7 +19,7 @@ export default function CourseContent({ data }) {
 
               {item.lesson.map((lesson, index) => (
                 <Accordion.Body key={index}>
-                  <LessonDetail index={index} lesson={lesson} />
+                  <LearnFree index={index} lesson={lesson} />
                 </Accordion.Body>
               ))}
             </Accordion.Item>
