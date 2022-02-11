@@ -26,8 +26,7 @@ const Table = props => {
     }
     return (
         <div className='table-wrapper'>
-            <h1>{props.test}</h1>
-            <table>
+            <table id='table'>
                 {
                     props.headeData && props.renderHead ? (
                         <thead>

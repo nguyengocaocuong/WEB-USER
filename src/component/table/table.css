@@ -1,23 +1,23 @@
 .table-wrapper {
   overflow-x: auto;
 }
-table {
+#table {
   width: 100%;
   min-width: 400px;
   border-spacing: 0;
 }
-thead {
+#table thead {
   background-color: var(--second-bg);
 }
-tr {
+#table tr {
   text-align: left;
 }
-th,
-td {
+#table th,
+#table td {
   text-transform: capitalize;
-  padding: 15px 10px;
+  padding: 1px 10px;
 }
-tbody > tr:hover {
+#table tbody > tr:hover {
   background-color: var(--main-color);
   color: var(--txt-white);
 }

@@ -25,11 +25,6 @@ function showItems(itemsInfo) {
 function CardBuyCourse({ data }) {
   var items = [
     {
-      classIcon: "fas fa-clock",
-      contentTitle: "Thời lượng",
-      content: "5 giờ 15 phút",
-    },
-    {
       classIcon: "fas fa-play-circle ",
       contentTitle: "Giáo trình",
       content: data[0].totalLessons,

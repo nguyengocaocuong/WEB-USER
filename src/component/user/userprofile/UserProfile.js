@@ -14,9 +14,9 @@ import {
 import Table from '../../../component/table/Table'
 const headData = [
   "",
-  "CourseName",
-  "LessonName",
-  "Date"
+  "Tên khóa học",
+  "Tên hài học",
+  "Ngày học"
 ]
 const fixData = [
   {
@@ -51,7 +51,7 @@ const renderBody = (item, index) => (
       <td>{index + 1}</td>
       <td>{item.Course_header}</td>
       <td>{item.Lesson_header}</td>
-      <td>{item.data}</td>
+      <td>{item.date}</td>
   </tr>
 )
 export default function UserProfile(props) {
