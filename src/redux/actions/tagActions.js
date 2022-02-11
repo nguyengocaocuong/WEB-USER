@@ -32,7 +32,7 @@ export const getTagItem = (id) => async (dispatch) => {
     type: TAG_ITEM_REQUEST,
   });
   try {
-    const data = await getData(`getCategoryByTag/${id}}`);
+    const data = await getData(`getCategoryByTag/${id}`);
 
     dispatch({
       type: TAG_ITEM_SUCCESS,
