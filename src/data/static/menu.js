@@ -1,13 +1,9 @@
 export const menu = [
   {
-    id: 1,
+    id: 6,
     classIcon: "fa fa-language",
     itemName: "Ngoại ngữ",
     childItems: [
-      {
-        title: "Tất cả Ngoại ngữ",
-        link: "/category/6",
-      },
       {
         title: "Tiếng Hàn",
         link: "/tag/16",
@@ -24,66 +20,66 @@ export const menu = [
         title: "Tiếng Nhật",
         link: "/tag/19",
       },
+      {
+        title: "Tiếng Nga",
+        link: "/tag/20",
+      },
+      {
+        title: "Tiếng Lào",
+        link: "/tag/21",
+      },
     ],
   },
   {
-    id: 2,
+    id: 8,
     classIcon: "fas fa-chart-line",
-    itemName: "Marketing",
-    childItems: [
-      {
-        title: "Tất cả Tin học văn phòng",
-        link: "/category/8",
-      },
-      {
-        title: "Excel",
-        link: "/tag/5",
-      },
-      {
-        title: "Word",
-        link: "/tag/6",
-      },
-      {
-        title: "PowerPoint",
-        link: "/tag/7",
-      },
-    ],
-  },
-  {
-    id: 3,
-    classIcon: "fa fa-desktop",
     itemName: "Tin học văn phòng",
     childItems: [
       {
-        title: "Tất cả Marketing",
-        link: "/category/8",
+        title: "Excel",
+        link: "/tag/30",
       },
       {
-        title: "Marketing Online",
-        link: "/tag/8",
+        title: "Word",
+        link: "/tag/31",
       },
       {
-        title: "Seo",
-        link: "/tag/9",
-      },
-      {
-        title: "Branding",
-        link: "/tag/10",
-      },
-      {
-        title: "Content Marketing",
-        link: "/tag/11",
-      },
-      {
-        title: "Video Marketing",
-        link: "/tag/12",
+        title: "PowerPoint",
+        link: "/tag/32",
       },
     ],
   },
   {
-    id: 4,
+    id: 7,
+    classIcon: "fa fa-desktop",
+    itemName: "Marketing",
+    childItems: [
+      {
+        title: "Marketing Online",
+        link: "/tag/25",
+      },
+      {
+        title: "Seo",
+        link: "/tag/26",
+      },
+      {
+        title: "Branding",
+        link: "/tag/27",
+      },
+      {
+        title: "Content Marketing",
+        link: "/tag/28",
+      },
+      {
+        title: "Video Marketing",
+        link: "/tag/29",
+      },
+    ],
+  },
+  {
+    id: 9,
     classIcon: "fa fa-paint-brush",
-    itemName: "Thiết kế/9",
+    itemName: "Thiết kế",
     childItems: [
       {
         title: "Tất cả Thiết kế",
@@ -108,7 +104,7 @@ export const menu = [
     ],
   },
   {
-    id: 5,
+    id: 10,
     classIcon: "fa fa-rocket",
     itemName: "Kinh doanh khởi nghiệp",
     childItems: [
@@ -151,7 +147,7 @@ export const menu = [
     ],
   },
   {
-    id: 6,
+    id: 10,
     classIcon: "fa fa-child",
     itemName: "Nuôi dạy con",
     childItems: [
@@ -174,14 +170,10 @@ export const menu = [
     ],
   },
   {
-    id: 7,
+    id: 12,
     classIcon: "fa fa-shopping-cart",
     itemName: "Sales, bán hàng",
     childItems: [
-      {
-        title: "Tất cả Sales, bán hàng",
-        link: "/category/7",
-      },
       {
         title: "Bán hàng Online",
         link: "/tag/28",
@@ -201,17 +193,35 @@ export const menu = [
     ],
   },
   {
-    id: 8,
+    id: 13,
     classIcon: "fa fa-code",
     itemName: " Công nghệ thông tin",
+    childItems: [
+      {
+        title: "Python",
+        link: "/tag/55",
+      },
+      {
+        title: "Java",
+        link: "/tag/56",
+      },
+      {
+        title: "JavaScript",
+        link: "/tag/57",
+      },
+      {
+        title: "C/C++",
+        link: "/tag/58",
+      },
+    ],
   },
   {
-    id: 9,
+    id: 14,
     classIcon: "fa fa-heartbeat",
     itemName: "Sức khoẻ giới tính",
   },
   {
-    id: 10,
+    id: 15,
     classIcon: "fa fa-camera",
     itemName: " Nhiếp ảnh, dựng phim",
   },

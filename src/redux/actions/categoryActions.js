@@ -34,7 +34,7 @@ export const getCategoryItem = (id) => async (dispatch) => {
     type: CATEGORY_ITEM_REQUEST,
   });
   try {
-    const category = await getData(`getCategoryById/${id}}`);
+    const category = await getData(`getCategoryById/${id}`);
 
     dispatch({
       type: CATEGORY_ITEM_SUCCESS,
