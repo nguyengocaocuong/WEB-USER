@@ -11,7 +11,49 @@ import {
   USER_UPDATE_PROFILE_RESET,
   USER_DETAILS_RESET,
 } from "../../../redux/constants/userContants";
-
+import Table from '../../../component/table/Table'
+const headData = [
+  "",
+  "CourseName",
+  "LessonName",
+  "Date"
+]
+const fixData = [
+  {
+    Course_header: "Tiếng Hàn",
+    Lesson_header: "Giới thiệu",
+    date: "21/20/2000"
+  },
+  {
+    Course_header: "Tiếng Hàn",
+    Lesson_header: "Giới thiệu",
+    date: "21/20/2000"
+  },
+  {
+    Course_header: "Tiếng Hàn",
+    Lesson_header: "Giới thiệu",
+    date: "21/20/2000"
+  },
+  {
+    Course_header: "Tiếng Hàn",
+    Lesson_header: "Giới thiệu",
+    date: "21/20/2000"
+  },
+  {
+    Course_header: "Tiếng Hàn",
+    Lesson_header: "Giới thiệu",
+    date: "21/20/2000"
+  }
+]
+const renderHead = (item, index) => <th key={index}>{item}</th>
+const renderBody = (item, index) => (
+  <tr key={index}>
+      <td>{index + 1}</td>
+      <td>{item.Course_header}</td>
+      <td>{item.Lesson_header}</td>
+      <td>{item.data}</td>
+  </tr>
+)
 export default function UserProfile(props) {
   const [dataUser, setDataUser] = useState({
     User_name: "",
@@ -136,19 +178,9 @@ export default function UserProfile(props) {
                     aria-controls="list-profile"
                   >
                     <i className="fa fa-unlock-alt" aria-hidden="true"></i>
-                    Thay đổi mật khẩu
+                    Lịch sử học tập
                   </a>
-                  <a
-                    className="list-group-item list-group-item-action"
-                    id="list-settings-list"
-                    data-bs-toggle="list"
-                    href="#list-settings"
-                    role="tab"
-                    aria-controls="list-settings"
-                  >
-                    <i className="fa fa-lock" aria-hidden="true"></i>
-                    Khoá tài khoản
-                  </a>
+
                 </div>
               </div>
             </div>
@@ -219,16 +251,16 @@ export default function UserProfile(props) {
                   role="tabpanel"
                   aria-labelledby="list-profile-list"
                 >
-                  ...
+                  <h4>Lịch sử học tập</h4>
+                 <Table
+                 limit='10'
+                 headeData={headData}
+                 renderHead={(item,index)=> renderHead(item,index)}
+                 bodyData={fixData}
+                 renderBody={(item,index)=> renderBody(item,index)}
+                 />
                 </div>
-                <div
-                  className="tab-pane fade"
-                  id="list-settings"
-                  role="tabpanel"
-                  aria-labelledby="list-settings-list"
-                >
-                  ...
-                </div>
+
               </div>
             </div>
           </div>
