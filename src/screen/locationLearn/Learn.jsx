@@ -18,55 +18,57 @@ export default function Learn() {
   }, [dispatch, id]);
 
   const [link, setLink] = useState("https://www.youtube.com/embed/9gewfuTiCP4");
-  const [title, setTitle] = useState("Gioi thieu");
+  const [title, setTitle] = useState("Giới thiệu");
   const [link2, setLink2] = useState(link);
-  const [title2, setTitle2] = useState("Gioi thieu");
+  const [title2, setTitle2] = useState("Giới thiệu");
   return (
     <>
       {" "}
       {loading && <LoadingPage />}
       {data && (
-        <div className="containerflex">
-          <div className="flexitem1">
-            {" "}
-            <iframe width="100%" height={400} src={link} title="video" />
-            <p>{title}</p>
-            <button
-              onClick={() => {
-                setLink(link2);
-                console.log("link: ", link2);
-              }}
-            >
-              next : {title2}
-            </button>
-          </div>
-          <div className="flexitem3">
-            <Accordion>
-              {data[2].map((item, index) => (
-                <Accordion.Item eventKey={index} key={index}>
-                  <Accordion.Header>
-                    Phần {index + 1}: {item.chap.Chap_description}
-                  </Accordion.Header>
+        <div className="container-fluid class1">
+          <div className="row">
+            <div className="flexitem1 col-8">
+              {" "}
+              <iframe
+                src={link}
+                width={"100%"}
+                height={"600px"}
+                title="video"
+              />
+              <p className="title">{title}</p>
+            </div>
+            <div className="flexitem3 col-4">
+              <Accordion>
+                {data[2].map((item, index) => (
+                  <Accordion.Item eventKey={index} key={index}>
+                    <Accordion.Header>
+                      Phần {index + 1}: {item.chap.Chap_description}
+                    </Accordion.Header>
 
-                  {item.lesson.map((lesson, index2) => (
-                    <Accordion.Body key={index2}>
-                      <a
-                        onClick={() => {
-                          setLink(lesson.Lesson_video);
-                          setTitle(
-                            "Bài: " + (index2 + 1) + ":" + lesson.Lesson_header
-                          );
-                          console.log("lesson: ", item.lesson[index2]);
-                          setLink2(item.lesson[index2].Lesson_video);
-                        }}
-                      >
-                        Bài {index2 + 1}: {lesson.Lesson_header}
-                      </a>
-                    </Accordion.Body>
-                  ))}
-                </Accordion.Item>
-              ))}
-            </Accordion>
+                    {item.lesson.map((lesson, index2) => (
+                      <Accordion.Body key={index2}>
+                        <a
+                          onClick={() => {
+                            setLink(lesson.Lesson_video);
+                            setTitle(
+                              "Bài: " +
+                                (index2 + 1) +
+                                ":" +
+                                lesson.Lesson_header
+                            );
+                            console.log("lesson: ", item.lesson[index2]);
+                            setLink2(item.lesson[index2].Lesson_video);
+                          }}
+                        >
+                          Bài {index2 + 1}: {lesson.Lesson_header}
+                        </a>
+                      </Accordion.Body>
+                    ))}
+                  </Accordion.Item>
+                ))}
+              </Accordion>
+            </div>
           </div>
         </div>
       )}
