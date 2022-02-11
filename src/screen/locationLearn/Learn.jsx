@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { Accordion } from "react-bootstrap";
 import { getUserCourseDetail } from "../../redux/actions/userActions";
 import LoadingPage from "../../component/Loading/Loading";
+import Axios from 'axios'
 import "./learn_css.scss";
 
 export default function Learn() {
@@ -21,6 +22,7 @@ export default function Learn() {
   const [title, setTitle] = useState("Giới thiệu");
   const [link2, setLink2] = useState(link);
   const [title2, setTitle2] = useState("Giới thiệu");
+
   return (
     <>
       {" "}
@@ -53,12 +55,18 @@ export default function Learn() {
                             setLink(lesson.Lesson_video);
                             setTitle(
                               "Bài: " +
-                                (index2 + 1) +
-                                ":" +
-                                lesson.Lesson_header
+                              (index2 + 1) +
+                              ":" +
+                              lesson.Lesson_header
                             );
-                            console.log("lesson: ", item.lesson[index2]);
                             setLink2(item.lesson[index2].Lesson_video);
+                            console.log(JSON.parse(localStorage.getItem("userInfo")).success.token)
+                            Axios.post("https://ltweb-backend.herokuapp.com/api/user/updateLearningHistory", { Lesson_ID: lesson.Lesson_ID }, {
+                              headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${JSON.parse(localStorage.getItem("userInfo")).success.token}`,
+                              },
+                            }).then(res => console.log(res))
                           }}
                         >
                           Bài {index2 + 1}: {lesson.Lesson_header}

@@ -5,7 +5,7 @@ import CategoryBody from "../../component/category/CategoryBody";
 
 export default function Category({ props }) {
   return (
-    <div style={{ margin: "65px 0" }}>
+    <div style={{ margin: "100px 0" }}>
       <CategoryHeader />
       <CategoryBody />
     </div>

@@ -21,7 +21,6 @@ export default function MyCourseDetail() {
       {loading && <LoadingPage />}
       {data && (
         <div style={{ margin: "60px auto" }}>
-          <button onClick={console.log("data: ", data)}>hieu</button>
           <div className="my-course-detail-header">
             <div className="container">
               <div className="row">
