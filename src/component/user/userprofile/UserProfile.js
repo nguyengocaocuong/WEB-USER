@@ -28,7 +28,8 @@ const renderBody = (item, index) => (
   </tr>
 )
 export default function UserProfile(props) {
-  const [fixData, setFixData] = useState([])
+  const [fixData, setFixData] = useState(null)
+  const [data, setData] = useState([])
   const [dataUser, setDataUser] = useState({
     User_name: "",
     User_account: "",
@@ -45,13 +46,12 @@ export default function UserProfile(props) {
   useEffect(() => {
     getData('user/getLearningHistory', JSON.parse(localStorage.getItem("userInfo")).success.token).then(data => {
       setFixData(data)
-      console.log(data)
+      setData(data.data)
     })
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(getUserDetail());
     } else {
-
       setDataUser({
         User_name: user.information.User_name,
         User_account: user.information.User_account,
@@ -97,18 +97,28 @@ export default function UserProfile(props) {
   };
 
   const next = () => {
+    if (fixData.next_page_url === null) return
     axios.get(fixData.next_page_url, {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem("userInfo")).success.token}`,
       },
-    }).then(data => setFixData(data))
+    }).then(data => {
+      setFixData(data.data)
+      setData(data.data.data)
+      console.log(fixData)
+    })
   }
   const prev = () => {
+    if (fixData.prev_page_url === null) return
     axios.get(fixData.prev_page_url, {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem("userInfo")).success.token}`,
       },
-    }).then(data => setFixData(data))
+    }).then(data => {
+      setFixData(data.data)
+      setData(data.data.data)
+      console.log(fixData)
+    })
   }
   return (
     <>
@@ -244,19 +254,18 @@ export default function UserProfile(props) {
                 >
                   <h4>Lịch sử học tập</h4>
                   {
-                    fixData.data.length > 0 ? <Table
-                      limit='10'
-                      headeData={headData}
-                      renderHead={(item, index) => renderHead(item, index)}
-                      bodyData={fixData.data}
-                      renderBody={(item, index) => renderBody(item, index)}
-                      nextPage={() => { next() }}
-                      prevPage={() => { prev() }}
-                    /> : ''
+                    fixData !== null ?
+                      <Table
+                        limit='10'
+                        headeData={headData}
+                        renderHead={(item, index) => renderHead(item, index)}
+                        bodyData={fixData.data}
+                        renderBody={(item, index) => renderBody(item, index)}
+                        nextPage={() => { next() }}
+                        prevPage={() => { prev() }}
+                      /> : ''
                   }
-
                 </div>
-
               </div>
             </div>
           </div>

@@ -34,16 +34,16 @@ function CardBuyCourse({ data }) {
       contentTitle: "Sở hữu khoá học trọn đời",
       content: null,
     },
-  ];
+  ]
 
   const dispatch = useDispatch();
   const buyCourse = useSelector((state) => state.buyCourse);
-
-  const { id } = useParams();
+  const { id } = useParams()
 
   const buyCourseHandler = () => {
-    dispatch(userbuyCourse(id));
-  };
+    dispatch(userbuyCourse(id))
+    window.history.go('/user/my-course')
+  }
 
   return (
     <div className="card-buy-course position-absolute">

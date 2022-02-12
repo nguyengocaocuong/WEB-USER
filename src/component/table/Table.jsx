@@ -61,7 +61,6 @@ const Table = props => {
                     </div>
                 ):null
             }
-            <button onClick={props.nextPage}>Next</button>
         </div>
     )
 }
