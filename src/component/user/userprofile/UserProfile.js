@@ -11,8 +11,25 @@ import {
   USER_UPDATE_PROFILE_RESET,
   USER_DETAILS_RESET,
 } from "../../../redux/constants/userContants";
+import Table from '../../../component/table/Table'
+import { getData } from "../../../utils/fecthData";
+const headData = [
+  "",
+  "Tên Bài học",
+  "Ngày học"
+]
 
+const renderHead = (item, index) => <th key={index}>{item}</th>
+const renderBody = (item, index) => (
+  <tr key={index}>
+    <td>{index + 1}</td>
+    <td>{item.Lesson_header}</td>
+    <td>{item.time}</td>
+  </tr>
+)
 export default function UserProfile(props) {
+  const [fixData, setFixData] = useState(null)
+  const [data, setData] = useState([])
   const [dataUser, setDataUser] = useState({
     User_name: "",
     User_account: "",
@@ -20,22 +37,26 @@ export default function UserProfile(props) {
     User_DoB: "",
   });
   const [avatar, setAvatar] = useState("");
-  console.log(avatar);
 
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
+
   const { user, loading } = userDetails;
 
   useEffect(() => {
+    getData('user/getLearningHistory', JSON.parse(localStorage.getItem("userInfo")).success.token).then(data => {
+      setFixData(data)
+      setData(data.data)
+    })
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(getUserDetail());
     } else {
       setDataUser({
-        User_name: user.information[0].User_name,
-        User_account: user.information[0].User_account,
-        User_phone: user.information[0].User_phone,
-        User_DoB: user.information[0].User_DoB,
+        User_name: user.information.User_name,
+        User_account: user.information.User_account,
+        User_phone: user.information.User_phone,
+        User_DoB: user.information.User_DoB,
       });
     }
   }, [dispatch, user]);
@@ -69,12 +90,36 @@ export default function UserProfile(props) {
       updateUserProfile({
         User_name: dataUser.User_name,
         User_DoB: dataUser.User_DoB,
-        User_image: media ? media : user.information[0].User_image,
+        User_image: media ? media : user.information.User_image,
       })
     );
     dispatch({ type: USER_DETAILS_RESET });
   };
 
+  const next = () => {
+    if (fixData.next_page_url === null) return
+    axios.get(fixData.next_page_url, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("userInfo")).success.token}`,
+      },
+    }).then(data => {
+      setFixData(data.data)
+      setData(data.data.data)
+      console.log(fixData)
+    })
+  }
+  const prev = () => {
+    if (fixData.prev_page_url === null) return
+    axios.get(fixData.prev_page_url, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("userInfo")).success.token}`,
+      },
+    }).then(data => {
+      setFixData(data.data)
+      setData(data.data.data)
+      console.log(fixData)
+    })
+  }
   return (
     <>
       {loading && <LoadingPage />}
@@ -88,7 +133,7 @@ export default function UserProfile(props) {
                     src={
                       avatar !== ""
                         ? URL.createObjectURL(avatar)
-                        : user.information[0].User_image
+                        : user.information.User_image
                     }
                     className="img-fluid image-avatar"
                     alt="avatar"
@@ -134,19 +179,9 @@ export default function UserProfile(props) {
                     aria-controls="list-profile"
                   >
                     <i className="fa fa-unlock-alt" aria-hidden="true"></i>
-                    Thay đổi mật khẩu
+                    Lịch sử học tập
                   </a>
-                  <a
-                    className="list-group-item list-group-item-action"
-                    id="list-settings-list"
-                    data-bs-toggle="list"
-                    href="#list-settings"
-                    role="tab"
-                    aria-controls="list-settings"
-                  >
-                    <i className="fa fa-lock" aria-hidden="true"></i>
-                    Khoá tài khoản
-                  </a>
+
                 </div>
               </div>
             </div>
@@ -217,15 +252,19 @@ export default function UserProfile(props) {
                   role="tabpanel"
                   aria-labelledby="list-profile-list"
                 >
-                  ...
-                </div>
-                <div
-                  className="tab-pane fade"
-                  id="list-settings"
-                  role="tabpanel"
-                  aria-labelledby="list-settings-list"
-                >
-                  ...
+                  <h4>Lịch sử học tập</h4>
+                  {
+                    fixData !== null ?
+                      <Table
+                        limit='10'
+                        headeData={headData}
+                        renderHead={(item, index) => renderHead(item, index)}
+                        bodyData={fixData.data}
+                        renderBody={(item, index) => renderBody(item, index)}
+                        nextPage={() => { next() }}
+                        prevPage={() => { prev() }}
+                      /> : ''
+                  }
                 </div>
               </div>
             </div>

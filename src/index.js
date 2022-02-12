@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import ChangeRouter from "./component/changeRouter";
 import store from "./redux/store";
 import "./index.scss";
-
+document.title = 'HiếuDZ';
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

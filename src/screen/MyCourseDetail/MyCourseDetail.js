@@ -15,6 +15,7 @@ export default function MyCourseDetail() {
   useEffect(() => {
     dispatch(getUserCourseDetail(id));
   }, [dispatch, id]);
+
   return (
     <>
       {loading && <LoadingPage />}
@@ -50,7 +51,7 @@ export default function MyCourseDetail() {
                 <div className="mt-3">
                   <div className="box-shadow p-2 mt-1">
                     <div className="box-header">
-                      <h6 className="pt-1 mb-0 pb-0">Nội dung khóa học</h6>
+                      <h6 className="pt-1 mb-0 pb-0">Nội dung khóa học </h6>
                     </div>
                     <div className="box-body">
                       <Accordion>
@@ -62,7 +63,11 @@ export default function MyCourseDetail() {
 
                             {item.lesson.map((lesson, index) => (
                               <Accordion.Body key={index}>
-                                <LessonDetail index={index} lesson={lesson} />
+                                <LessonDetail
+                                  index={index}
+                                  lesson={lesson}
+                                  id={id}
+                                />
                               </Accordion.Body>
                             ))}
                           </Accordion.Item>
@@ -88,8 +93,6 @@ export default function MyCourseDetail() {
                         </Link>
                       </div>
                     </div>
-
-                    <p></p>
                   </div>
                 </div>
               </div>

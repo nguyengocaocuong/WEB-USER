@@ -27,7 +27,7 @@ class CourseItem extends Component {
                 <div className="col-6">
                   <div className="text-end mt-1">
                     <p>
-                      {this.props.course.Course_price} <sup>đ</sup>
+                      {this.props.course.Course_price} <sup>$</sup>
                     </p>
                   </div>
                 </div>
